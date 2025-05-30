@@ -19,3 +19,4 @@ jobs:
     runs-on: windows-latest  # 在 Windows 最新版环境中运行
     steps:
       - run: node --version  # 执行命令：打印 Node.js 版本
+      - run: ls   # 执行命令：列出当前目录内容
