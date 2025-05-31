@@ -36,7 +36,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages #指定分支，它会把我们生产环境文件放到gp-pages分支里
-          folder: ./admin/admin/dist # The folder the action should deploy.
+          folder: ./admin/admin/dist-pro # The folder the action should deploy.
 
 #跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
 #需要进行仓库settings--->page 指明使用gp pages分支
