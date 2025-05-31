@@ -1,22 +1,35 @@
-# 定义触发工作流的事件
 on:
-  push:  # 当有 push 操作时触发工作流
-    branches: [ main ]  # 可选：指定触发分支（例如 main）
-  # 也可以添加其他触发事件，例如：
-  # pull_request:  # 当有 pull request 时触发
-  # schedule:  # 定时触发
-  #   - cron: '0 0 * * *'  # 每天午夜触发
+  push:
+    branches: [ main ]
 
-# 定义工作流中的任务（jobs）
 jobs:
-  job1:  # 第一个任务
-    runs-on: ubuntu-latest  # 在 Ubuntu 最新版环境中运行
+  pnpm-build:
+    name: 构建admin前端
+    runs-on: ubuntu-latest
     steps:
-      - run: pwd  # 执行命令：打印当前工作目录
-      - run: ls   # 执行命令：列出当前目录内容
+      - name: Checkout repository
+        uses: actions/checkout@v4 #使用这个action可以访问我们自己仓库的内容
 
-  job2:  # 第二个任务
-    runs-on: windows-latest  # 在 Windows 最新版环境中运行
-    steps:
-      - run: node --version  # 执行命令：打印 Node.js 版本
-      - run: ls   # 执行命令：列出当前目录内容
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      #- name: Change to project directory  # 切换到子目录
+       # run: cd admin  # 替换为你的实际子目录名称
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: admin  # 指定工作目录
+
+      - name: Build project
+        run: pnpm run build:pro
+        working-directory: admin  # 指定工作目录
+
+
+#原始配置中没有 actions/checkout@v4 步骤，
+#这意味着工作流无法获取你的代码仓库内容
