@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 #使用这个action可以访问我们自己仓库的内容
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -19,17 +19,16 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      #- name: Change to project directory  # 切换到子目录
-       # run: cd admin  # 替换为你的实际子目录名称
+      - name: Verify pnpm installation
+        run: pnpm --version
 
       - name: Install dependencies
-        run: pnpm install
-        working-directory: admin  # 指定工作目录
+        run: pnpm install --frozen-lockfile
+        working-directory: admin  # 替换为你的实际子目录名称
 
       - name: Build project
         run: pnpm run build:pro
-        working-directory: admin  # 指定工作目录
-
+        working-directory: admin  # 替换为你的实际子目录名称
 
 #原始配置中没有 actions/checkout@v4 步骤，
 #这意味着工作流无法获取你的代码仓库内容
