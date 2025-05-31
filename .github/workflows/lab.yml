@@ -23,11 +23,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        working-directory: admin  # 替换为你的实际子目录名称
+        working-directory: admin/admin  # 替换为你的实际子目录名称
 
       - name: Build project
         run: pnpm run build:pro
-        working-directory: admin  # 替换为你的实际子目录名称
+        working-directory: admin/admin  # 替换为你的实际子目录名称
 
 #原始配置中没有 actions/checkout@v4 步骤，
 #这意味着工作流无法获取你的代码仓库内容
