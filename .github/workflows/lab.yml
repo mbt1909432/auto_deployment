@@ -18,7 +18,8 @@ jobs:
 
       - name: Sign in to server
         run: |
-          ssh root@${{ secrets.HOST_NAME }}
+          ssh root@47.86.163.244
+
           
 
 #
