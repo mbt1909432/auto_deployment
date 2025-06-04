@@ -15,10 +15,14 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
 
+      - name: 更新 known_hosts 文件  # 步驟的名稱
+        run: |  # 將要執行的命令
+          mkdir -p ~/.ssh 
+          ssh-keyscan ${{ secrets.HOST_NAME }} >> ~/.ssh/known_hosts
 
-      - name: Sign in to server
+      - name: Sign in to server #aa
         run: |
-          ssh root@47.86.163.244
+          ssh root@47.86.163.244 
 
           
 
