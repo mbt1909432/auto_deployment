@@ -18,8 +18,7 @@ jobs:
 
       - name: Sign in to server
         run: |
-          ssh root@${{ secrets.HOST_NAME }}'
-          ls'
+          ssh root@${{ secrets.HOST_NAME }}
           
 
 #
