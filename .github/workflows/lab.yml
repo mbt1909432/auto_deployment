@@ -26,8 +26,8 @@ jobs:
 
       - name: Sign in to server #aa
         run: |
-          ssh root@${{ secrets.HOST_NAME }}
-          "ls -l; echo 'aaa'; ls "
+          ssh root@${{ secrets.HOST_NAME }} "bash -c 'ls -l; echo \"aaa\"; ls'"
+
 
 
       - name: Sign in to server #aa
