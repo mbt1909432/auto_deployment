@@ -18,7 +18,9 @@ jobs:
 
       - name: Sign in to server
         run: |
-          ssh root@${{ secrets.HOST_NAME }}
+          ssh root@${{ secrets.HOST_NAME }}'
+          ls'
+          
 
 #
 #跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
