@@ -31,7 +31,7 @@ jobs:
       - name: Sign in to server #aa
         run: |
           ls
-          cat "--------------"
+          echo "--------------"
           ls
           
 
