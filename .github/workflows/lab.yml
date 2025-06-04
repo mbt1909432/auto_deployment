@@ -44,6 +44,7 @@ jobs:
           pwd
           echo "--------------"
           ls
+          cat .env
           
 
 #
