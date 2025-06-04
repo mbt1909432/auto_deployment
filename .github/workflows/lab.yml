@@ -10,6 +10,10 @@ jobs:
     name: 构建admin前端
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
