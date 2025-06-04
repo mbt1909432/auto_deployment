@@ -18,13 +18,20 @@ jobs:
       - name: 更新 known_hosts 文件,否则无法进行后续连接  # 步驟的名稱
         run: |  # 將要執行的命令
           mkdir -p ~/.ssh 
+          echo "----------------------"
+          cat ~/.ssh/known_hosts
           ssh-keyscan ${{ secrets.HOST_NAME }} >> ~/.ssh/known_hosts
+          echo "----------------------"
           cat ~/.ssh/known_hosts
 
       - name: Sign in to server #aa
         run: |
           ssh root@${{ secrets.HOST_NAME }}
 
+      - name: Sign in to server #aa
+        run: |
+          ls
+          ls
           
 
 #
