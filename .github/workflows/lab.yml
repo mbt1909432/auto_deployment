@@ -49,9 +49,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-        context: ./fastapi_service #工作流会在 ./fastapi_service 目录下查找 Dockerfile 和相关文件（如依赖项、源代码等）。 我感觉后续可能要先执行 dockerfile的移动了
-        push: true
-        tags: ghcr.io/${{ secrets.GIT_USER}}/fastapi:latest  # 使用你的 Docker Hub 使用者名稱和應用程式名
+         context: ./fastapi_service #工作流会在 ./fastapi_service 目录下查找 Dockerfile 和相关文件（如依赖项、源代码等）。 我感觉后续可能要先执行 dockerfile的移动了
+         push: true
+         tags: ghcr.io/${{ secrets.GIT_USER}}/fastapi:latest  # 使用你的 Docker Hub 使用者名稱和應用程式名
 
 #
 #跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
