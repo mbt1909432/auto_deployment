@@ -1,0 +1,45 @@
+on:
+  push:
+    branches: [ main ]
+
+permissions: #需要写入权限 否则不行 https://github.com/JamesIves/github-pages-deploy-action
+  contents: write
+
+jobs:
+  pnpm-build:
+    name: 构建admin前端
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Verify pnpm installation
+        run: pnpm --version
+
+      - name: Install dependencies
+        run: pnpm install
+        working-directory: admin/admin  # 替换为你的实际子目录名称
+
+      - name: 打包 project
+        run: pnpm run build:pro
+        working-directory: admin/admin  # 替换为你的实际子目录名称
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages #指定分支，它会把我们生产环境文件放到gp-pages分支里
+          folder: ./admin/admin/dist-pro # The folder the action should deploy.
+
+#跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
+#需要进行仓库settings--->page 指明使用gp pages分支
+
+#原始配置中没有 actions/checkout@v4 步骤，
+#这意味着工作流无法获取你的代码仓库内容
