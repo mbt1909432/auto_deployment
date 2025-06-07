@@ -4,6 +4,7 @@ on:
 
 permissions: #需要写入权限 否则不行 https://github.com/JamesIves/github-pages-deploy-action
   contents: write
+  packages: write
 
 jobs:
   pnpm-build:
