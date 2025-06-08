@@ -76,6 +76,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
+         cache-from: type=gha,scope=container
+         cache-to: type=gha,mode=max,scope=container
          context: ./fastapi_service #工作流会在 ./fastapi_service 目录下查找 Dockerfile 和相关文件（如依赖项、源代码等）。 我感觉后续可能要先执行 dockerfile的移动了
          push: true
          labels: ${{ steps.metadata.outputs.labels }}
