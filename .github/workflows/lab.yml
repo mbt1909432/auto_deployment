@@ -57,12 +57,26 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+
+
+      - name: Extract metadata
+        id: metadata
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ secrets.GIT_USER }}/fastapi:latest
+          tags: |
+              type=ref,event=branch
+              type=ref,event=tag
+              type=raw,value=latest
+              type=sha
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
          context: ./fastapi_service #工作流会在 ./fastapi_service 目录下查找 Dockerfile 和相关文件（如依赖项、源代码等）。 我感觉后续可能要先执行 dockerfile的移动了
          push: true
-         tags: ghcr.io/${{ secrets.GIT_USER}}/fastapi:latest  # 使用你的 Docker Hub 使用者名稱和應用程式名
+         labels: ${{ steps.metadata.outputs.labels }}
+         tags: ${{ steps.metadata.outputs.tags }} #不再是${{ env.REGISTRY }}/${{ secrets.GIT_USER }}/fastapi:latest ？？？tags还可以表示什么？？
 
 #
 #跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
