@@ -2,9 +2,7 @@ on:
   push:
     branches: [ main ]
 
-permissions: #需要写入权限 否则不行 https://github.com/JamesIves/github-pages-deploy-action
-  contents: write
-  packages: write #加了这个不确定是否会出现在package里？还是没有？？
+
 
 env:
   REGISTRY: ghcr.io
@@ -13,6 +11,11 @@ jobs:
   pnpm-build:
     name: 构建fastapi基本服务
     runs-on: ubuntu-latest
+
+    permissions: #需要写入权限 否则不行 https://github.com/JamesIves/github-pages-deploy-action
+      contents: read
+      packages: write #加了这个不确定是否会出现在package里？还是没有？？
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -79,7 +82,7 @@ jobs:
          tags: ${{ steps.metadata.outputs.tags }} #不再是${{ env.REGISTRY }}/${{ secrets.GIT_USER }}/fastapi:latest ？？？tags还可以表示什么？？
 
          #之前的${{ env.REGISTRY }}/${{ secrets.GIT_USER }}/fastapi:latest是: #11 pushing manifest for ghcr.io/***/fastapi:latest@sha256:656165cfbdd41639007d6899dae6c3b7ce9c3f3f2f2acff66f55b77b226573cc
-#
+         #修改后 pushing manifest for ghcr.io/***/fastapi:sha-49c8f78@sha256:80d267de5d946906ceacb3f1fb5727a01df0358e0ceaf865d0cd6ccc56e687db 0.4s done
 #跑完之后会多一个 gp-pages分支，这个分支就是生产环境文件
 #需要进行仓库settings--->page 指明使用gp pages分支
 
